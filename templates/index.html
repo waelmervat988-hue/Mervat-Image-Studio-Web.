@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>موقع مرڤت لمعالجة الصور</title>
+    <style>
+        body { background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); font-family: 'Segoe UI', sans-serif; text-align: center; padding: 40px; }
+        .container { background: white; max-width: 650px; margin: auto; padding: 30px; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+        h1 { color: #5c67f2; }
+        .upload-section { background: #f9f9f9; padding: 20px; border-radius: 15px; margin-bottom: 20px; }
+        select, input { padding: 10px; margin: 10px 0; border-radius: 8px; border: 1px solid #ddd; width: 90%; }
+        .btn-process { background: #4caf50; color: white; border: none; padding: 12px 35px; border-radius: 25px; cursor: pointer; font-weight: bold; }
+        .result-area { margin-top: 30px; border-top: 2px dashed #5c67f2; padding-top: 20px; }
+        img { border-radius: 10px; max-width: 100%; margin-top: 15px; }
+        .hint { font-size: 0.8em; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📸 موقع مرڤت لمعالجة الصور</h1>
+        <div class="upload-section">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label>الصورة الأساسية:</label>
+                <input type="file" name="file1" required>
+                
+                <label>الصورة الثانية (فقط للدمج):</label>
+                <input type="file" name="file2">
+                
+                <select name="filter">
+                    <option value="gray">أبيض وأسود</option>
+                    <option value="sepia">ألوان دافئة (Sepia)</option>
+                    <option value="invert">عكس الألوان (Negative)</option>
+                    <option value="edges">كشف الحواف (Edges)</option>
+                    <option value="bright">زيادة الإضاءة</option>
+                    <option value="merge">دمج صورتين</option>
+                </select>
+                <br>
+                <button type="submit" class="btn-process">تطبيق تأثير</button>
+            </form>
+        </div>
+
+        {% if filename %}
+            <div class="result-area">
+                <h3>✨ النتيجة بلمسة مرڤت:</h3>
+                <img src="{{ url_for('static', filename=filename) }}?{{ salt }}">
+                <br>
+                <a href="{{ url_for('static', filename=filename) }}" download style="display:inline-block; margin-top:15px; color:#ff9800; font-weight:bold;">⬇️ تحميل النتيجة</a>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
