@@ -41,7 +41,7 @@
 
         {% if filename %}
             <div class="result-area">
-                <h3>✨ النتيجة بلمسة مرڤت:</h3>
+                <h3> النتيجة  :</h3>
                 <img src="{{ url_for('static', filename=filename) }}?{{ salt }}">
                 <br>
                 <a href="{{ url_for('static', filename=filename) }}" download style="display:inline-block; margin-top:15px; color:#ff9800; font-weight:bold;">⬇️ تحميل النتيجة</a>
